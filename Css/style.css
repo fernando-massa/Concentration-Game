@@ -1,0 +1,22 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background-color: lightgray;
+}
+
+table {
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    width: 100px;
+}
+
+.cells {
+    width: 100px;
+    border: 2px solid red;
+    height: 100px;
+}

@@ -1,10 +1,10 @@
 # Concentration-Game
 
---Wireframe link--
-[](https://whimsical.com/concentration-game-5265hYtTQMcXMsGcaeERF4@2Ux7TurymND9W9Zg5DQ9)
 
---Pseudo code link--
-[](https://docs.google.com/document/d/1UxDKur2-RvQeKXYVvmFk5OAPOKE9MGswL-u-3QmGtPw/edit?usp=sharing)
+[--Wireframe link--](https://whimsical.com/concentration-game-5265hYtTQMcXMsGcaeERF4@2Ux7TurymND9W9Zg5DQ9)
+
+
+[--Pseudo code link--](https://docs.google.com/document/d/1UxDKur2-RvQeKXYVvmFk5OAPOKE9MGswL-u-3QmGtPw/edit?usp=sharing)
 
 
 
