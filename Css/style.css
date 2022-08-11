@@ -1,23 +1,26 @@
 html,
 body {
-    height: 100%;
-    width: 100%;
     text-align: center;
     background-color: lightgray;
-}
-
-table {
-    display: flex;
+    align-items: center;
+    align-self: center;
     justify-content: center;
 }
 
-img {
-    width: 100px;
-    height: 100px;
-}
+.board {
+    margin: 0 auto; /*From my friend Luiz*/
+    display: flex;
+    flex-wrap: wrap;
+    height: 450px;
+    width: 450px;
+    
+  }
 
-.cells {
-    width: 100px;
-    border: 2px solid red;
-    height: 100px;
-}
+  img {
+    margin: 3px;
+  }
+
+  #winMessage {
+  
+     padding: 25px;
+  }

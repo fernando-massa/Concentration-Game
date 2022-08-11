@@ -1,49 +1,169 @@
 
-let cardsFlipped = 0;
+//https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
+//Window: DOMContentLoaded event
+// The DOMContentLoaded event fires when the initial HTML document has been completely loaded and parsed, 
+// without waiting for stylesheets, images, and subframes to finish loading.
 
-const cardTypes=[
-    'images/dragon-solid.svg','images/dragon-solid.svg','images/fire-solid.svg','images/fire-solid.svg',
-    'images/floppy-disk-solid.svg', 'images/floppy-disk-solid.svg', 'images/ghost-solid.svg', 'images/ghost-solid.svg',
-    'images/guitar-solid.svg', 'images/guitar-solid.svg', 'images/ice-cream-solid.svg', 'images/ice-cream-solid.svg',
-    'images/poo-solid.svg', 'images/poo-solid.svg', 'images/skull-crossbones-solid.svg', 'images/skull-crossbones-solid.svg',
-    'images/umbrella-beach-solid.svg', 'images/umbrella-beach-solid.svg', 'images/user-astronaut-solid.svg', 'images/user-astronaut-solid.svg'
-]
+// The original target for this event is the Document that has loaded. You can listen for this 
+// event on the Window interface to handle it in the capture or bubbling phases. For full details on this 
+// event please see the page on the Document: DOMContentLoaded event.
 
-// RANDONMIZE CARDS
-cardTypes.sort(()=>(Math.random()*2)-1)
 
-console.log(cardTypes);
+// WORKS WITHOUT IT
+document.addEventListener("DOMContentLoaded", () => {
 
-// element references
-const cells = document.querySelectorAll("img");
+    /*----- constants -----*/
+    //icon options for the board
+    const iconArray = [
+        {
+            name: 'dragon',
+            img: "images/dragon-solid.svg"
+        },
+        {
+            name: 'dragon',
+            img: "images/dragon-solid.svg"
+        },
+        {
+            name: 'fire',
+            img: "images/fire-solid.svg"
+        },
+        {
+            name: 'fire',
+            img: "images/fire-solid.svg"
+        },
+        {
+            name: 'floppy',
+            img: "images/floppy-disk-solid.svg"
+        },
+        {
+            name: 'floppy',
+            img: "images/floppy-disk-solid.svg"
+        },
+        {
+            name: 'ghost',
+            img: "images/ghost-solid.svg"
+        },
+        {
+            name: 'ghost',
+            img: "images/ghost-solid.svg"
+        },
+        {
+            name: 'guitar',
+            img: "images/guitar-solid.svg"
+        },
+        {
+            name: 'guitar',
+            img: "images/guitar-solid.svg"
+        },
+        {
+            name: 'ice-cream',
+            img: "images/ice-cream-solid.svg"
+        },
+        {
+            name: 'ice-cream',
+            img: "images/ice-cream-solid.svg"
+        },
+        {
+            name: 'poo',
+            img: "images/poo-solid.svg"
+        },
+        {
+            name: 'poo',
+            img: "images/poo-solid.svg"
+        },
+        {
+            name: 'skull',
+            img: "images/skull-crossbones-solid.svg"
+        },
+        {
+            name: 'skull',
+            img: "images/skull-crossbones-solid.svg"
+        }
 
-//const backImg = document.querySelectorAll('img');
-// backImg.src="images/dragon-solid.svg";
-// document.querySelectorAll('img').src="images/dragon-solid.svg";
+    ]
 
-for (let index = 0; index < cardTypes.length; index++) {
-    const cell = cells[index];
-cell.src=cardTypes[index];
-}
+    // RANDONMIZE CARDS
+    // Help from a friend
+    iconArray.sort(() => (Math.random() * 2) - 1);
 
-function starGame() {
-    //document.querySelectorAll('img').src="/images/dragon-solid.svg";
-    
-    
-    cells.innerHTML = '<img src="images/dragon-solid.svg"></img>';
-}
+    /*----- cached element references -----*/
+    const board = document.querySelector(".board");
+    const resetButton = document.getElementById("button");
 
-console.log(cells)
-//document.querySelectorAll("img").addEventListener('click', showIcon)
-//document.querySelectorAll('.picture').addEventListener('click', showIcon)
- //this.innerHTML = '<img src="images/dragon-solid.svg"></img>'
- //cells.addEventListener('click', showIcon)
+    /*----- app's state (variables) -----*/
+    // to cache and compare 2 selected icons
+    let iconPicked = [];
+    let iconPickedId = [];
 
-//document.querySelector('table').addEventListener('click', handleMove);
+    /*----- functions -----*/
+    //Initiate CREATE GAME BOARD
+    function createBoard() {
+        for (let i = 0; i < iconArray.length; i++) {
+            let iconImg = document.createElement('img');
+            iconImg.setAttribute('src', 'images/back.png')
+            iconImg.setAttribute('data-id', i);
+            iconImg.setAttribute('width', "100px");
+            iconImg.setAttribute('height', "100px");
+            iconImg.addEventListener("click", flipIcon);
+            board.appendChild(iconImg);
+        }
+    }
 
-function showIcon(evt) {
-    console.log("click")
-    //this.innerHTML = '<img src="images/dragon-solid.svg"></img>'
+    // Help from John
+    function flipIcon() {
+        // selects icon by data-id index
+        let iconID = this.getAttribute('data-id');
+        // stores icon's name key value in iconPicked array
+        iconPicked.push(iconArray[iconID].name);
+        // stores icon's image key value in iconPickedId array
+        iconPickedId.push(iconID);
+        // loads icon image source from iconArray
+        this.setAttribute('src', iconArray[iconID].img);
+        //delays flip over if cards are wrong
+        if (iconPicked.length === 2) {
+            setTimeout(checkMatch, 300)
+        }
+    }
+    // Help from John
+    function checkMatch() {
+        // Sound effects
+        let winSound = new Audio('Sounds/small-applause-6695.mp3')
+        let wrongSound = new Audio('Sounds/booohwav-14768.mp3')
 
-  }
+        // to display message to user
+        let winMsg = document.getElementById("winMessage");
+        let cards = document.querySelectorAll('img');
+        const firstFlipId = iconPickedId[0];
+        const seconfFlipId = iconPickedId[1];
+        //Checks if both icons Id's at index [0] and [1] are the same
+        if (iconPicked[0] === iconPicked[1]) {
+            //display message if a match
+            winMsg.innerHTML = "Match!";
+            winSound.play();
+        }
 
+        else {
+            //IF not a match, resets first and second picks
+            cards[firstFlipId].setAttribute('src', 'images/back.png');
+            cards[seconfFlipId].setAttribute('src', 'images/back.png');
+            //display message if a match
+            winMsg.innerHTML = "No match!";
+            wrongSound.play();
+        }
+        // clears arrays for next picks
+        iconPicked = [];
+        iconPickedId = [];
+
+    }
+
+    // Refresh page code from:
+    //https://www.techiedelight.com/reload-page-with-javascript/
+    window.addEventListener("load", event => {
+        document.getElementById("button").onclick = function () {
+            location.assign(location.href); // or, use `location.assign(location)`
+        }
+    });
+
+    // Initiate game
+    createBoard();
+})
