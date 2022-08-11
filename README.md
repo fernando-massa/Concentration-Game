@@ -1,7 +1,7 @@
 # Concentration-Game
 
 
-[GAME LINK](capable-semifreddo-5fbf3c.netlify.app)
+[GAME LINK](https://capable-semifreddo-5fbf3c.netlify.app/)
 
 [--Wireframe link--](https://whimsical.com/concentration-game-5265hYtTQMcXMsGcaeERF4@2Ux7TurymND9W9Zg5DQ9)
 
