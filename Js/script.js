@@ -1,17 +1,3 @@
-
-//https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
-//Window: DOMContentLoaded event
-// The DOMContentLoaded event fires when the initial HTML document has been completely loaded and parsed, 
-// without waiting for stylesheets, images, and subframes to finish loading.
-
-// The original target for this event is the Document that has loaded. You can listen for this 
-// event on the Window interface to handle it in the capture or bubbling phases. For full details on this 
-// event please see the page on the Document: DOMContentLoaded event.
-
-
-// WORKS WITHOUT IT
-document.addEventListener("DOMContentLoaded", () => {
-
     /*----- constants -----*/
     //icon options for the board
     const iconArray = [
@@ -166,4 +152,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initiate game
     createBoard();
-})
